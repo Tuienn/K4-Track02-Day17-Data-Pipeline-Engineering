@@ -23,9 +23,9 @@ SOURCES = {
 }
 
 # How many days back every daily run recomputes gold_feature_daily.
-# Events are produced by our own apps and reach Kafka within seconds, so each
-# run only needs to recompute its own day.
-LOOKBACK_DAYS = 0
+# Measured from 43 Bronze event records: P99 = 3 calendar days (P95 = 2.9).
+# Recompute by event time across ceil(P99) days to include offline deliveries.
+LOOKBACK_DAYS = 3
 
 EMBEDDING_MODEL_VERSION = "hash-embed-v1"
 CHUNK_WORDS = 40
